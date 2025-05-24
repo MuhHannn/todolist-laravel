@@ -6,7 +6,7 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('tasks.index')" :active="request()->routeIs('tasks.index')">
-                        {{ __('Todolists') }}
+                        <h1 style="font-size: x-large">Todolists</h1>
                     </x-nav-link>
                 </div>
 

@@ -46,16 +46,27 @@ class TaskController extends Controller
         return view('tasks.edit', compact('task'));
     }
 
-    public function update(Request $request, Task $task)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'task' => 'required|string|max:255',
         ]);
 
-        $task->update([
-            'task' => $request->task,
-            'is_completed' => $request->is_completed,
-        ]);
+        $task = Task::where('user_id', Auth::id())->findOrFail($id);
+
+        // Update task saja
+        $updateData = ['task' => $request->task];
+
+        // Ubah status jika ada input is_completed
+        if ($request->has('is_completed')) {
+            $task->is_completed = $request->is_completed;
+            $task->save();
+
+            // Redirect tanpa flash message
+            return redirect()->route('tasks.index');
+        }
+
+        $task->update($updateData);
 
         return redirect()->route('tasks.index')->with('success', 'Task berhasil diperbarui!');
     }

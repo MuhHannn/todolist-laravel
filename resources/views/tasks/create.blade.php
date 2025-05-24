@@ -43,8 +43,15 @@
             padding: .5rem 1rem;
         }
         .btn-secondary {
-            background-color: #6c757d;
-            padding: .63rem 1rem;
+            display: inline-block;
+            color: #a5a5a5;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn-secondary:hover {
+            text-decoration: underline;
         }
         .error {
             background-color: #f8d7da;
@@ -75,8 +82,10 @@
                 <input type="text" name="task" id="task" value="{{ old('task') }}" required>
             </div>
 
-            <button type="submit" class="btn btn-primary">Simpan</button>
-            <a href="{{ route('tasks.index') }}" class="btn btn-secondary">Kembali</a>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <a href="{{ route('tasks.index') }}" class="btn-secondary">← Kembali</a>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
         </form>
     </div>
 </x-app-layout>

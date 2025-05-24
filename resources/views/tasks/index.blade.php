@@ -9,6 +9,13 @@
             margin: 0 0 1% 0;
         }
 
+        h4 {
+            text-align: center;
+            margin: 0 0 2% 0;
+            font-size: larger;
+            font-weight: bold;
+        }
+
         .box {
             background-color: #011638;
             margin: 2%;
@@ -70,12 +77,12 @@
 
         .btn-create {
             background-color: #007bff;
-            padding: 5px 10px;
+            padding: 7px 20px;
             margin-right: 5px;
             border: none;
             border-radius: 3px;
             cursor: pointer;
-            font-size: 13px;
+            /* font-size: 13px; */
             text-decoration: none;
             color: white;
             display: inline-block;
@@ -115,26 +122,26 @@
 
     <div class="container">
         <div class="box">
-            <h1>Todolist</h1>
+            <h1>Daftar Tasks</h1>
 
             <a href="{{ route('tasks.create') }}" class="btn-create" style="margin-bottom: 20px; display:inline-block;">Tambah Task</a>
 
 
             <div class="tasks">
-                <div>
-                    <h4 class="box-undone">Belum Selesai</h4>
+                <div class="box-undone">
+                    <h4>Belum Selesai</h4>
                     <table>
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Task</th>
-                                <th>Aksi</th>
+                                <th style="width: 5%">No</th>
+                                <th style="width: 65%">Task</th>
+                                <th style="width: 30%">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ($tasks->where('is_completed', false) as $index => $task)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td style="text-align: center">{{ $loop->iteration }}</td>
                                     <td>{{ $task->task }}</td>
                                     <td class="actions">
                                         <div>
@@ -150,8 +157,8 @@
                                             <!-- Tombol edit -->
                                             <a href="{{ route('tasks.edit', $task->id) }}" class="btn-edit">Edit</a>
                                             
-                                            <!-- Tombol edit -->
-                                            <a href="{{ route('tasks.show', $task->id) }}" class="btn-show">Show</a>
+                                            <!-- Tombol detail -->
+                                            <a href="{{ route('tasks.show', $task->id) }}" class="btn-show">Detail</a>
 
                                             <!-- Tombol hapus -->
                                             <form action="{{ route('tasks.destroy', $task->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Yakin hapus?')">
@@ -176,15 +183,15 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Task</th>
-                                <th>Aksi</th>
+                                <th style="width: 5%">No</th>
+                                <th style="width: 65%">Task</th>
+                                <th style="width: 30%">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ($tasks->where('is_completed', true) as $index => $task)
                                 <tr>
-                                    <td>{{ $loop->iteration  }}</td>
+                                    <td style="text-align: center">{{ $loop->iteration  }}</td>
                                     <td>{{ $task->task }}</td>
                                     <td class="actions">
                                         <div>
@@ -196,6 +203,9 @@
                                                 <input type="hidden" name="is_completed" value="0">
                                                 <button class="btn-secondary" type="submit">Ulangi</button>
                                             </form>
+
+                                            <!-- Tombol detail -->
+                                            <a href="{{ route('tasks.show', $task->id) }}" class="btn-show">Detail</a>
 
                                             <!-- Tombol hapus -->
                                             <form action="{{ route('tasks.destroy', $task->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Yakin hapus?')">
